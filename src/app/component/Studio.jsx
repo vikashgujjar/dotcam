@@ -44,7 +44,7 @@ export default function Studio() {
             href="#"
             className="text-3xl md:text-4xl font-extrabold text-red-600 hover:text-white transition-colors duration-300"
           >
-            DOTCAM STUDIO
+            #Dotcam Studio
 
           </Link>
           <p className="text-base md:text-lg font-bold leading-relaxed text-gray-300 text-justify hover:text-gray-100 transition-colors duration-300">

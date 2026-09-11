@@ -66,26 +66,7 @@ const BlogLeft = () => {
         {/* Featured Posts */}
         <div className="border border-gray-50 p-6 ">
           <h4 className="font-bold mb-4 text-white">Featured Posts</h4>
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="flex gap-4 mb-4">
-              <Image
-                src={`/img/sp-f-${i}.webp`}
-                alt="Post"
-                width={80}
-                height={80}
-                className="rounded-md"
-              />
-              <div>
-                <Link
-                  href="#"
-                  className="font-medium hover:text-[#e7000b] text-white"
-                >
-                  Photography give you the opportunity to
-                </Link>
-                <p className="text-sm text-white">January 15, 2018</p>
-              </div>
-            </div>
-          ))}
+          <p className="text-sm text-gray-300">Coming soon.</p>
         </div>
 
         {/* Sidebar Banner */}
@@ -102,26 +83,7 @@ const BlogLeft = () => {
         {/* Top Posts */}
         <div className="border border-gray-50 p-6 ">
           <h4 className="font-bold mb-4 text-white">Top New Posts</h4>
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="flex gap-4 mb-4">
-              <Image
-                src={`/img/tp-${i}.webp`}
-                alt="Top post"
-                width={80}
-                height={80}
-                className="rounded-md"
-              />
-              <div>
-                <Link
-                  href="#"
-                  className="font-medium text-white hover:text-[#e7000b]"
-                >
-                  Smallest thing can be a great subject.
-                </Link>
-                <p className="text-sm text-white">January 15, 2018</p>
-              </div>
-            </div>
-          ))}
+          <p className="text-sm text-gray-300">Coming soon.</p>
         </div>
       </div>
     </>

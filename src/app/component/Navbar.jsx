@@ -119,7 +119,7 @@ export default function Navbar() {
             <li className="border-b pb-4 px-6 md:px-10 border-[#18181e]">
               <button className="w-full text-left hover:text-[#e7000b] flex justify-between items-center transition">
                 <Link href="/services" onClick={() => setIsOpen(false)}>
-                  Services
+                  SERVICES
                 </Link>
                 <FaChevronDown
                   className={`text-lg transition-transform duration-300 ${
@@ -137,29 +137,29 @@ export default function Navbar() {
               <>
                 <li className="border-b pb-4 px-6 md:px-10 border-[#18181e]">
                   <Link
-                    href="/cinematic-videos"
+                    href="/dotcam-studio"
                     className="hover:text-[#e7000b] transition"
                     onClick={() => setIsOpen(false)}
                   >
-                    Cinematic Videos
+                    Dotcam Studio
                   </Link>
                 </li>
                 <li className="border-b pb-4 px-6 md:px-10 border-[#18181e]">
                   <Link
-                    href="/wedding-films"
+                    href="/dotcam-social-sync"
                     className="hover:text-[#e7000b] transition"
                     onClick={() => setIsOpen(false)}
                   >
-                    Wedding Films
+                    Dotcam Social Sync
                   </Link>
                 </li>
                 <li className="border-b pb-4 px-6 md:px-10 border-[#18181e]">
                   <Link
-                    href="/images-and-videos"
+                    href="/dotcam-productions"
                     className="hover:text-[#e7000b] transition"
                     onClick={() => setIsOpen(false)}
                   >
-                    Images and Videos
+                    Dotcam Productions
                   </Link>
                 </li>
               </>

@@ -26,7 +26,7 @@ export default function Social() {
             data-aos-delay="200"
             className="text-3xl md:text-4xl font-extrabold text-red-600 hover:text-white transition-colors duration-300"
           >
-            DOTCAM SOCIAL SYNC
+            #Dotcam Social Sync
 
           </Link>
           <p

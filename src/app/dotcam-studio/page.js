@@ -4,7 +4,10 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { FaInstagram, FaPlay } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 import TestimonialSection from "../component/Testimonial";
 import ContactSection from "../component/Contact";
 
@@ -21,25 +24,6 @@ export default function Banner() {
   const fadeInUp = { initial: { opacity: 0, y: 30 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.8 } };
   const fadeIn = { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 0.8 } };
 
-  // Counter animation
-  const [photoCount, setPhotoCount] = useState(0);
-  const [satisfactionCount, setSatisfactionCount] = useState(0);
-  const [photographersCount, setPhotographersCount] = useState(0);
-
-  useEffect(() => {
-    const duration = 1500; // 1.5 sec
-    const increment = 5;
-    let start = 0;
-    const interval = setInterval(() => {
-      start += increment;
-      if (start >= 350) start = 350;
-      setPhotoCount(start);
-      setSatisfactionCount(Math.min(Math.round((start / 350) * 100), 100));
-      setPhotographersCount(Math.min(Math.round((start / 350) * 50), 50));
-      if (start === 350) clearInterval(interval);
-    }, duration / (350 / increment));
-  }, []);
-
   return (
     <>
       {/* Banner Section */}
@@ -49,9 +33,9 @@ export default function Banner() {
           <Image src="/img/circle.webp" alt="circle shape" width={120} height={120} className="animate-spin-slow opacity-80" />
         </div>
         <motion.div className="relative z-10" {...fadeInUp}>
-          <h2 className="text-4xl md:text-5xl font-bold text-white">Cinematic Social Media Videos</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white">Dotcam Studio</h2>
           <p className="mt-4 text-lg text-gray-200 max-w-2xl mx-auto">
-            From impactful snippets to irresistible ad videos, we phrase your idea for maximum attention & engagement.
+            Your Moments. Our Lens. Made Timeless.
           </p>
         </motion.div>
       </section>
@@ -61,11 +45,11 @@ export default function Banner() {
         <div className="mb-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <motion.div className="lg:col-span-5" {...fadeInUp}>
-              <h1 className="text-2xl lg:text-5xl font-bold text-white">Cinematic Social Media Videos</h1>
+              <h1 className="text-2xl lg:text-5xl font-bold text-white">Your story, beautifully framed.</h1>
             </motion.div>
             <motion.div className="lg:col-span-7" {...fadeInUp}>
               <p className="text-white leading-relaxed text-lg text-justify">
-                Beyond just visuals, our cinematic social media videos are designed to evoke emotions and spark engagement. We focus on blending storytelling with eye-catching edits, trending formats, and platform-friendly pacing so your brand stands out in crowded feeds. Whether it’s for Instagram reels, YouTube shorts, or TikTok campaigns, our videos turn casual scrollers into loyal followers and potential customers.
+                Dotcam turns real moments into beautiful visual stories. From celebrating love to capturing confidence, personality, and the journey of motherhood, we create photographs and films that feel natural, stylish, and truly yours.
               </p>
             </motion.div>
           </div>
@@ -74,66 +58,107 @@ export default function Banner() {
         {/* Images */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-16">
           <motion.div className="md:col-span-8" {...fadeInUp}>
-            <Image src="/img/cinema.webp" alt="Service 1" width={800} height={500} className="shadow-md object-cover w-full" />
+            <Swiper
+              modules={[Autoplay]}
+              autoplay={{ delay: 3500, disableOnInteraction: false }}
+              loop={true}
+              className="shadow-md w-full h-125"
+            >
+              <SwiperSlide>
+                <Image src="/img/cinema.webp" alt="Service 1" width={800} height={500} className="w-full h-full object-cover" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <Image src="/img/details-2.webp" alt="Service 1 alternate" width={800} height={500} className="w-full h-full object-cover" />
+              </SwiperSlide>
+            </Swiper>
           </motion.div>
           <motion.div className="md:col-span-4" {...fadeInUp}>
-            <Image src="/img/details-3.webp" alt="Service 2" width={400} height={500} className="shadow-md object-cover w-full" />
+            <Swiper
+              modules={[Autoplay]}
+              autoplay={{ delay: 4000, disableOnInteraction: false }}
+              loop={true}
+              className="shadow-md w-full h-125"
+            >
+              <SwiperSlide>
+                <Image src="/img/details-3.webp" alt="Service 2" width={400} height={500} className="w-full h-full object-cover" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <Image src="/img/8.webp" alt="Service 2 alternate" width={400} height={500} className="w-full h-full object-cover" />
+              </SwiperSlide>
+            </Swiper>
           </motion.div>
         </div>
 
         {/* Content + Counters */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           <motion.div className="lg:col-span-8 text-justify" {...fadeInUp}>
-            <h4 className="text-2xl font-semibold mb-4 text-white">Service Steps</h4>
-            <p className="text-white mb-6 text-lg">
-              At DOTCAM, every project begins with a vision—and we bring that vision to life with skill, creativity, and precision. From portraits and events to commercials and creative campaigns, our team is dedicated to capturing stories that matter.
-            </p>
+            <h4 className="text-2xl font-semibold mb-4 text-white">Our Dotcam Studio Services</h4>
 
             <ul className="space-y-3 mb-6">
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="text-pink-600 mt-1" />
                 <span className="text-white">
-                  <strong>Expertise that inspires:</strong> Across multiple markets, geographies, and styles, our photographers combine technical mastery with artistic flair to deliver images that stand out.
+                  <strong>Pre-Wedding Shoots</strong><br/>Cinematic and romantic pre-wedding photography and films designed around your story, personality, and style.
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="text-pink-600 mt-1" />
                 <span className="text-white">
-                  <strong>Organized for excellence:</strong> With years of experience and a passion for storytelling, DOTCAM ensures a smooth and professional process from concept to final delivery.
+                  <strong>Maternity Shoots</strong><br/>Elegant and emotional maternity photography that beautifully preserves one of the most meaningful chapters of your life.
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="text-pink-600 mt-1" />
                 <span className="text-white">
-                  <strong>Creativity that connects:</strong> From lifestyle shoots and cinematic visuals to editorial projects, our team pushes boundaries to craft visuals that truly resonate.
+                  <strong>Model Portfolios</strong><br/>Professional portfolio shoots created to showcase your confidence, personality, expressions, and versatility in front of the camera.
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle2 className="text-pink-600 mt-1" />
+                <span className="text-white">
+                  <strong>Creative Portraits & Lifestyle Shoots</strong><br/>From personal branding to fashion-inspired portraits, we create polished imagery made to stand out.
                 </span>
               </li>
             </ul>
-
-            <p className="text-white text-lg">
-              Across every market, every location, and every shoot, DOTCAM stands by one promise: <span className="italic">“We Can Shoot You.”</span>
-            </p>
           </motion.div>
 
-          <motion.div className="lg:col-span-4 space-y-8" {...fadeInUp}>
-            <div className="bg-white shadow-md rounded-lg p-6 flex items-center gap-4">
-              <div className="text-4xl font-bold text-pink-600">{photoCount}+</div>
-              <div className="text-gray-700 font-medium">Photography Session</div>
-            </div>
-            <div className="bg-white shadow-md rounded-lg p-6 flex items-center gap-4">
-              <div className="text-4xl font-bold text-pink-600">{satisfactionCount}%</div>
-              <div className="text-gray-700 font-medium">Customer Satisfaction</div>
-            </div>
-            <div className="bg-white shadow-md rounded-lg p-6 flex items-center gap-4">
-              <div className="text-4xl font-bold text-pink-600">{photographersCount}+</div>
-              <div className="text-gray-700 font-medium">Experienced Photographers</div>
-            </div>
+          <motion.div className="lg:col-span-4" {...fadeInUp}>
+            <Swiper
+              modules={[Autoplay, Pagination]}
+              autoplay={{ delay: 4000, disableOnInteraction: false }}
+              pagination={{ clickable: true }}
+              loop={true}
+              className="rounded-lg overflow-hidden shadow-md h-100"
+            >
+              <SwiperSlide>
+                <video
+                  className="w-full h-full object-cover"
+                  controls
+                  muted
+                  playsInline
+                >
+                  <source src="/img/studio-1.mp4" type="video/mp4" />
+                </video>
+              </SwiperSlide>
+              <SwiperSlide>
+                <Image src="/img/bd-2.webp" alt="Dotcam Studio shoot" width={400} height={500} className="w-full h-full object-cover" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <Image src="/img/tp-1.webp" alt="Dotcam Studio shoot" width={400} height={500} className="w-full h-full object-cover" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <Image src="/img/tp-2.webp" alt="Dotcam Studio shoot" width={400} height={500} className="w-full h-full object-cover" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <Image src="/img/tp-3.webp" alt="Dotcam Studio shoot" width={400} height={500} className="w-full h-full object-cover" />
+              </SwiperSlide>
+            </Swiper>
           </motion.div>
         </div>
       </section>
 
       {/* Video Section */}
-      <section className="relative py-40 bg-cover bg-center" style={{ backgroundImage: "url('/img/bg-14.webp')" }}>
+      {/* <section className="relative py-40 bg-cover bg-center" style={{ backgroundImage: "url('/img/bg-14.webp')" }}>
         <div className="absolute inset-0 bg-black/40" />
         <motion.div className="relative z-10 flex flex-col items-center justify-center text-center" {...fadeIn}>
           <a href="https://www.youtube.com/watch?v=SF4aHwxHtZ0" className="flex items-center justify-center w-20 h-20 rounded-full bg-[#b90808] hover:bg-red-500 hover:text-white transition duration-300" target="_blank">
@@ -142,9 +167,9 @@ export default function Banner() {
         </motion.div>
 
         <Image src="/img/light-3.webp" alt="light effect" width={200} height={200} className="absolute bottom-0 right-10 opacity-70" />
-      </section>
+      </section> */}
 
-      {/* Features Section */}
+      {/* Features Section 
       <section className="py-20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
@@ -163,9 +188,9 @@ export default function Banner() {
             ))}
           </div>
         </div>
-      </section>
+      </section>*/}
 
-      <TestimonialSection />
+      {/* <TestimonialSection /> */}
       <ContactSection />
 
       {/* Instagram Gallery */}
@@ -182,7 +207,7 @@ export default function Banner() {
             ))}
           </div>
           <div className="mt-8 text-center">
-            <a href="#" className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-full shadow-md hover:scale-105 transition-transform duration-300">
+            <a href="https://www.instagram.com/dotcam_productions/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-full shadow-md hover:scale-105 transition-transform duration-300">
               <FaInstagram className="text-lg" />
               <span className="font-medium">Follow Us on Instagram</span>
             </a>
