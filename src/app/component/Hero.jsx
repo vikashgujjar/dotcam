@@ -67,7 +67,7 @@ and breathtaking photo and video stories, capturing your moments with artistry a
         <div
           data-aos="fade-up"
           data-aos-delay="800"
-          className="flex gap-4 items-center mt-16 text-sm font-semibold font-inter"
+          className="flex flex-wrap justify-center gap-x-3 gap-y-2 items-center mt-16 px-6 text-xs sm:text-sm font-semibold font-inter"
         >
           <span>BRANDING</span>
           <span>

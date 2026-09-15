@@ -3,11 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaChevronDown } from "react-icons/fa";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [openServices, setOpenServices] = useState(false);
 
   return (
     <header className="relative left-modern-menu">
@@ -103,7 +101,7 @@ export default function Navbar() {
           md:top-0 md:left-[75px] md:h-full top-[60px] left-0 w-full md:w-[380px] 
         `}
       >
-        <div className="h-full overflow-y-auto py-10 md:py-20 scrollbar-thin scrollbar-thumb-[#e7000b] scrollbar-track-[#18181e]">
+        <div className="overflow-y-auto py-10 md:py-20 scrollbar-thin scrollbar-thumb-[#e7000b] scrollbar-track-[#18181e] h-[90vh] md:h-auto">
           <ul className="space-y-6 uppercase font-medium tracking-wide text-xl md:text-2xl">
             <li className="border-b pb-4 px-6 md:px-10 border-[#18181e]">
               <Link
@@ -115,55 +113,44 @@ export default function Navbar() {
               </Link>
             </li>
 
-            {/* Services Dropdown */}
+            {/* Services
             <li className="border-b pb-4 px-6 md:px-10 border-[#18181e]">
-              <button className="w-full text-left hover:text-[#e7000b] flex justify-between items-center transition">
-                <Link href="/services" onClick={() => setIsOpen(false)}>
-                  SERVICES
-                </Link>
-                <FaChevronDown
-                  className={`text-lg transition-transform duration-300 ${
-                    openServices ? "rotate-180" : "rotate-0"
-                  }`}
-                  onClick={(e) => {
-                    e.stopPropagation(); // stop overlay click
-                    setOpenServices(!openServices);
-                  }}
-                />
-              </button>
-            </li>
+              <Link
+                href="/services"
+                className="hover:text-[#e7000b] transition"
+                onClick={() => setIsOpen(false)}
+              >
+                SERVICES
+              </Link>
+            </li> */}
 
-            {openServices && (
-              <>
-                <li className="border-b pb-4 px-6 md:px-10 border-[#18181e]">
-                  <Link
-                    href="/dotcam-studio"
-                    className="hover:text-[#e7000b] transition"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Dotcam Studio
-                  </Link>
-                </li>
-                <li className="border-b pb-4 px-6 md:px-10 border-[#18181e]">
-                  <Link
-                    href="/dotcam-social-sync"
-                    className="hover:text-[#e7000b] transition"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Dotcam Social Sync
-                  </Link>
-                </li>
-                <li className="border-b pb-4 px-6 md:px-10 border-[#18181e]">
-                  <Link
-                    href="/dotcam-productions"
-                    className="hover:text-[#e7000b] transition"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Dotcam Productions
-                  </Link>
-                </li>
-              </>
-            )}
+            <li className="border-b pb-4 px-6 md:px-10 border-[#18181e]">
+              <Link
+                href="/dotcam-studio"
+                className="hover:text-[#e7000b] transition"
+                onClick={() => setIsOpen(false)}
+              >
+                Dotcam Studio
+              </Link>
+            </li>
+            <li className="border-b pb-4 px-6 md:px-10 border-[#18181e]">
+              <Link
+                href="/dotcam-social-sync"
+                className="hover:text-[#e7000b] transition"
+                onClick={() => setIsOpen(false)}
+              >
+                Dotcam Social Sync
+              </Link>
+            </li>
+            <li className="border-b pb-4 px-6 md:px-10 border-[#18181e]">
+              <Link
+                href="/dotcam-productions"
+                className="hover:text-[#e7000b] transition"
+                onClick={() => setIsOpen(false)}
+              >
+                Dotcam Productions
+              </Link>
+            </li>
 
             <li className="border-b pb-4 px-6 md:px-10 border-[#18181e]">
               <Link

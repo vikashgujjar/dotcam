@@ -246,8 +246,8 @@ const Page = () => {
       >
         <div className="absolute inset-0 bg-black/50"></div>
         <div className="relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-white">Pricing</h1>
-          <p className="mt-4 text-lg text-gray-200 max-w-2xl mx-auto">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-white">Pricing</h1>
+          <p className="mt-4 text-base md:text-lg font-bold leading-relaxed text-gray-200 max-w-2xl mx-auto">
             From impactful snippets to irresistible ad videos, we phrase your
             idea for maximum attention & engagement.
           </p>
@@ -256,7 +256,7 @@ const Page = () => {
 
       <section className="py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-3xl md:text-5xl font-bold mb-12">
+          <h1 className="text-3xl md:text-4xl font-extrabold mb-12">
             Choose the Perfect Plan for Your Shoot
           </h1>
 
@@ -307,7 +307,7 @@ const Page = () => {
                 )}
 
                 <h3
-                  className={`text-lg font-semibold mb-3 absolute top-[18%] left-20 lg:left-16 ${
+                  className={`text-lg font-semibold tracking-wide mb-3 absolute top-[18%] left-20 lg:left-16 ${
                     idx === 0 ? "text-black" : "text-white"
                   }`}
                 >
@@ -322,7 +322,7 @@ const Page = () => {
                   className="mx-auto"
                 />
 
-                <p className="text-gray-600 mt-4 mb-2">{plan.desc}</p>
+                <p className="text-base leading-relaxed text-gray-600 mt-4 mb-2">{plan.desc}</p>
                 <p className="text-xl font-bold">
                   {isMonthly ? plan.monthlyPrice : plan.yearlyPrice}
                 </p>
@@ -398,7 +398,7 @@ const Page = () => {
                       >
                         <div className="flex flex-col items-center relative">
                           <h3
-                            className={`font-semibold text-xl unset lg:absolute top-22 left-5 text-gray-800 text-center ${
+                            className={`text-lg font-semibold tracking-wide unset lg:absolute top-22 left-5 text-gray-800 text-center ${
                               i === 0
                                 ? "text-black"
                                 : " text-black lg:text-white"
@@ -451,7 +451,7 @@ const Page = () => {
       </section>
 
       <section className="py-20 bg-white px-5 lg:px-10">
-        <h2 className="text-3xl font-bold mb-8">
+        <h2 className="text-3xl md:text-4xl font-extrabold mb-8">
           On-brand creative, available on-demand
         </h2>
         <div className="mx-auto  grid md:grid-cols-2 items-center gap-12">
@@ -467,8 +467,8 @@ const Page = () => {
                     : "bg-gray-100 hover:bg-gray-200"
                 }`}
               >
-                <h3 className="text-lg font-semibold">{step.title}</h3>
-                <p className="text-sm mt-2">{step.desc}</p>
+                <h3 className="text-lg font-semibold tracking-wide">{step.title}</h3>
+                <p className="text-sm leading-relaxed mt-2">{step.desc}</p>
                 {step.note && (
                   <p className="text-xs mt-1 opacity-75">{step.note}</p>
                 )}
@@ -484,7 +484,7 @@ const Page = () => {
               height={400}
               className=" mb-6"
             />
-            <h3 className="text-xl font-semibold">{steps[active].title}</h3>
+            <h3 className="text-lg font-semibold tracking-wide">{steps[active].title}</h3>
           </div>
         </div>
       </section>
@@ -493,10 +493,10 @@ const Page = () => {
         <div className="max-w-6xl mx-auto px-4">
           {/* Heading */}
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
               We’re built different
             </h2>
-            <p className="mt-2 text-gray-600">
+            <p className="mt-2 text-base md:text-lg leading-relaxed text-gray-600">
               With soona, you save time and stay on budget without sacrificing
               quality.
             </p>

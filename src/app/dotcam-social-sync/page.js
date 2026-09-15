@@ -1,374 +1,331 @@
 "use client";
-import { CheckCircle2 } from "lucide-react";
-import Image from "next/image";
-import { FaInstagram, FaPlay } from "react-icons/fa";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import TestimonialSection from "../component/Testimonial";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Palette,
+  Megaphone,
+  Camera,
+  Rocket,
+  Globe,
+  Clapperboard,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { FaInstagram } from "react-icons/fa";
 import ContactSection from "../component/Contact";
-import { Autoplay, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+const staggerContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
+
+function DuotonePhoto({ src, alt, label, className = "" }) {
+  return (
+    <div className={`relative overflow-hidden ${className}`}>
+      <Image src={src} alt={alt} fill sizes="33vw" className="object-cover grayscale" />
+      <div className="absolute inset-0 bg-red-600 mix-blend-multiply" />
+      <div className="absolute inset-0 bg-black/10" />
+      {label && (
+        <span className="absolute bottom-4 left-4 text-white text-xs font-bold tracking-widest uppercase">
+          {label}
+        </span>
+      )}
+    </div>
+  );
+}
+
+function InstagramMarqueeRow({ items, reverse = false }) {
+  return (
+    <div className="overflow-hidden">
+      <div className={`flex gap-4 md:gap-6 ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}>
+        {[...items, ...items].map((src, i) => (
+          <div key={i} className="relative shrink-0 w-40 h-40 md:w-52 md:h-52 overflow-hidden group">
+            <Image src={src} alt="Dotcam Social Sync on Instagram" fill sizes="220px" className="object-cover grayscale" />
+            <div className="absolute inset-0 bg-red-600 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-1">
+              <FaInstagram className="text-white text-2xl" />
+              <span className="text-white text-xs font-bold uppercase tracking-wide">@dotcam_social_sync</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function Banner() {
-  const images = [
-    "/img/1.webp",
-    "/img/2.webp",
-    "/img/3.webp",
-    "/img/4.webp",
-    "/img/5.webp",
+  const [active, setActive] = useState(0);
+
+  const instaRowA = ["/img/1.webp", "/img/2.webp", "/img/3.webp", "/img/4.webp", "/img/5.webp"];
+  const instaRowB = ["/img/wedding2.webp", "/img/beauty.avif", "/img/tp-1.webp", "/img/details-2.webp", "/img/details-3.webp"];
+
+  const services = [
+    {
+      icon: Palette,
+      title: "Branding & Creative Direction",
+      desc: "Brand identity, visual style, campaign concepts, and a consistent voice for your business.",
+    },
+    {
+      icon: Megaphone,
+      title: "Social Media Management",
+      desc: "Strategy, content planning, posting, captions, reels, and ongoing management across every platform.",
+    },
+    {
+      icon: Camera,
+      title: "Photo & Video Production",
+      desc: "Professional photography, promo videos, reels, and branded content produced for your audience.",
+    },
+    {
+      icon: Rocket,
+      title: "Meta & Google Advertising",
+      desc: "Campaign ideas, ad copy, creative production, and campaign management in one strategy.",
+    },
+    {
+      icon: Globe,
+      title: "Website & Digital Presence",
+      desc: "Modern business websites designed to make your brand look professional and ready to grow.",
+    },
+    {
+      icon: Clapperboard,
+      title: "Pre to Post-Production",
+      desc: "Concept, script, shoot, edit, publish, promote — we manage the full creative pipeline.",
+    },
   ];
 
-  const features = [
-    {
-      id: 1,
-      title: "Creative Excellence",
-      desc: "We believe every shoot is a canvas. Our team blends artistic vision with modern technology to create visuals that are bold, stylish, and unforgettable.",
-      img: "/img/11.webp",
-      link: "#",
-    },
-    {
-      id: 2,
-      title: "Professional Team",
-      desc: "At DOTCAM, experience runs wide and deep. Our photographers, editors, and creative directors are some of the finest professionals in the industry.",
-      img: "/img/10.webp",
-      link: "#",
-    },
-    {
-      id: 3,
-      title: "Client-Centered Approach",
-      desc: "Your story is our priority. From planning to delivery, we ensure every detail reflects your vision — delivering work that truly connects with your audience.",
-      img: "/img/9.webp",
-      link: "#",
-    },
+  const testimonials = [
+    { quote: "Our engagement tripled within weeks of working with Dotcam Social Sync.", name: "Local Boutique Owner" },
+    { quote: "Finally, a team that understands both the creative and the strategy side.", name: "Fitness Studio Founder" },
+    { quote: "Consistent, on-brand content without us lifting a finger.", name: "Cafe & Restaurant Group" },
   ];
-
-  const fadeInUp = {
-    initial: { opacity: 0, y: 30 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.8, ease: "easeOut" },
-  };
-
-  const fadeIn = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    transition: { duration: 0.8 },
-  };
 
   return (
-    <>
-      {/* Banner Section */}
-      <section
-        className="relative py-24 bg-cover bg-center text-center"
-        style={{ backgroundImage: "url('/img/page-header-bg-2.webp')" }}
-      >
-        <div className="absolute inset-0 bg-black/40"></div>
-        <div className="absolute left-10 top-10">
+    <div className="bg-black text-white overflow-x-hidden">
+      {/* Hero */}
+      <section className="relative bg-red-600 pt-12 pb-5 md:pt-5 md:pb-14 overflow-hidden">
+        <div className="pointer-events-none absolute -top-32 -right-32 h-96 w-96 rounded-full bg-black/10 blur-3xl" />
+        <div className="container mx-auto px-6 relative">
+          <div className="flex items-center justify-between mb-8 md:mb-14">
+            <span className="text-sm md:text-base font-bold tracking-widest uppercase">Dotcam</span>
+            <span className="text-sm md:text-base font-bold tracking-widest uppercase">Social Sync</span>
+          </div>
+
           <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
           >
-            <Image
-              src="/img/circle.webp"
-              alt="circle shape"
-              width={120}
-              height={120}
-              className="opacity-80"
-            />
+            <h2 className="text-5xl md:text-8xl font-black leading-[0.95] uppercase">
+              Your Business.
+              <br />
+              <span className="text-black">Built To Be Seen.</span>
+            </h2>
+            <p className="mt-8 max-w-xl text-base md:text-lg font-semibold leading-relaxed text-black/80">
+              Where creativity meets growth — branding, content, and campaigns designed around your business goals.
+            </p>
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-black text-white px-7 py-3 font-bold uppercase tracking-wide hover:bg-neutral-900 transition"
+              >
+                Start Your Strategy <ArrowRight size={18} />
+              </Link>
+              <a
+                href="https://www.instagram.com/dotcam_social_sync?igsh=MWJkYzhiNXFuMTFoZQ%3D%3D&utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-bold uppercase tracking-wide text-black hover:opacity-70 transition"
+              >
+                <FaInstagram size={18} /> @dotcam_social_sync
+              </a>
+            </div>
           </motion.div>
         </div>
-
-        <motion.div className="relative z-10" {...fadeInUp}>
-          <h2 className="text-4xl md:text-5xl font-bold text-white">Dotcam Social Sync</h2>
-          <p className="mt-4 text-lg text-gray-200 max-w-2xl mx-auto">
-            Your Business. Built to Be Seen. Where Creativity Meets Growth.
-          </p>
-        </motion.div>
       </section>
 
-      {/* Blog Details Section */}
-      <section className="blog-details-inner container mx-auto px-6 py-20">
-        <div className="mb-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <motion.div className="lg:col-span-5" {...fadeInUp}>
-              <h1 className="text-2xl lg:text-5xl font-bold text-white">You Run the Business. We Build the Attention.</h1>
-            </motion.div>
-            <motion.div className="lg:col-span-7" {...fadeInUp}>
-              <p className="text-white leading-relaxed text-lg text-justify">
-                <strong>
-                  A successful brand needs more than random posts and occasional ads. It needs a strategy.
-                </strong><br />
-
-                We understand your business, define your audience, develop your brand identity, plan your content, produce professional photos and videos, manage your social platforms, and create advertising campaigns designed around your business goals.
+      {/* Poster grid */}
+      <section className="bg-red-600 pb-20 md:pb-28">
+        <div className="container mx-auto px-6">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 auto-rows-[160px] md:auto-rows-[220px]"
+          >
+            <motion.div
+              variants={fadeUp}
+              className="col-span-2 row-span-1 md:row-span-2 bg-black flex flex-col justify-center p-6 md:p-10"
+            >
+              <p className="text-2xl md:text-4xl font-black uppercase leading-tight text-white">
+                We create content that stops the scroll.
               </p>
             </motion.div>
-          </div>
-        </div>
 
-        {/* Images */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-16 items-center">
-          <motion.div className="md:col-span-8" {...fadeInUp}>
-            <Swiper
-              modules={[Autoplay]}
-              autoplay={{ delay: 3500, disableOnInteraction: false }}
-              loop={true}
-              className="shadow-md w-full aspect-8/6"
+            <motion.div variants={fadeUp} className="relative">
+              <DuotonePhoto src="/img/wedding.webp" alt="Dotcam Social Sync branding" className="w-full h-full" label="Branding" />
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="bg-white text-black flex flex-col justify-between p-5 md:p-6">
+              <p className="text-xs font-bold tracking-widest uppercase text-red-600">Quick Tip</p>
+              <p className="text-lg md:text-xl font-black uppercase leading-tight">
+                Consistency beats virality.
+              </p>
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="relative row-span-1 md:row-span-2">
+              <DuotonePhoto src="/img/beauty.avif" alt="Dotcam Social Sync content creation" className="w-full h-full" label="Content Creation" />
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="bg-black flex items-center justify-center p-6">
+              <p className="text-3xl md:text-5xl font-black uppercase text-red-600 text-center leading-none">
+                Social
+                <br />
+                Sync
+              </p>
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="relative">
+              <DuotonePhoto src="/img/tp-1.webp" alt="Dotcam Social Sync photography" className="w-full h-full" label="Photography" />
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              className="col-span-2 bg-black flex flex-col justify-center p-6 md:p-10"
             >
-              <SwiperSlide>
-                <Image
-                  src="/img/wedding.webp"
-                  alt="Service 1"
-                  width={800}
-                  height={500}
-                  className="w-full h-full object-cover"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Image
-                  src="/img/bd-2.webp"
-                  alt="Service 1 alternate"
-                  width={800}
-                  height={500}
-                  className="w-full h-full object-cover"
-                />
-              </SwiperSlide>
-            </Swiper>
-          </motion.div>
+              <p className="text-xs font-bold tracking-widest uppercase text-red-600 mb-2">What Clients Say</p>
+              <p className="text-xl md:text-3xl font-black uppercase leading-tight text-white">
+                &ldquo;{testimonials[active].quote}&rdquo;
+              </p>
+              <div className="flex gap-2 mt-4">
+                {testimonials.map((t, i) => (
+                  <button
+                    key={t.name}
+                    type="button"
+                    onClick={() => setActive(i)}
+                    aria-label={`Show testimonial from ${t.name}`}
+                    className={`h-1.5 rounded-full transition-all ${
+                      i === active ? "w-8 bg-red-600" : "w-4 bg-white/30"
+                    }`}
+                  />
+                ))}
+              </div>
+            </motion.div>
 
-          <motion.div className="md:col-span-4 space-y-6" {...fadeInUp}>
-            <Swiper
-              modules={[Autoplay]}
-              autoplay={{ delay: 4000, disableOnInteraction: false }}
-              loop={true}
-              className="shadow-md w-full aspect-4/3"
+            <motion.div variants={fadeUp} className="relative">
+              <DuotonePhoto src="/img/tp-3.webp" alt="Dotcam Social Sync campaigns" className="w-full h-full" label="Campaigns" />
+            </motion.div>
+
+            <Link href="/contact" className="contents">
+              <motion.div
+                variants={fadeUp}
+                whileHover={{ scale: 0.98 }}
+                className="bg-white text-black flex flex-col justify-between p-5 md:p-6 cursor-pointer"
+              >
+                <p className="text-lg md:text-2xl font-black uppercase leading-tight">
+                  Start growing with Dotcam
+                </p>
+                <ArrowUpRight size={28} className="text-red-600" />
+              </motion.div>
+            </Link>
+
+            {/* Barcode + handle card */}
+            <motion.div
+              variants={fadeUp}
+              className="bg-black flex flex-col items-center justify-center gap-4 p-6"
             >
-              <SwiperSlide>
-                <Image
-                  src="/img/wedding2.webp"
-                  alt="Service 2"
-                  width={400}
-                  height={500}
-                  className="w-full h-full object-cover"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Image
-                  src="/img/tp-1.webp"
-                  alt="Service 2 alternate"
-                  width={400}
-                  height={500}
-                  className="w-full h-full object-cover"
-                />
-              </SwiperSlide>
-            </Swiper>
-            <Swiper
-              modules={[Autoplay]}
-              autoplay={{ delay: 4500, disableOnInteraction: false }}
-              loop={true}
-              className="shadow-md w-full aspect-4/3"
-            >
-              <SwiperSlide>
-                <Image
-                  src="/img/beauty.avif"
-                  alt="Service 2"
-                  width={400}
-                  height={500}
-                  className="w-full h-full object-cover"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Image
-                  src="/img/tp-3.webp"
-                  alt="Service 2 alternate"
-                  width={400}
-                  height={500}
-                  className="w-full h-full object-cover"
-                />
-              </SwiperSlide>
-            </Swiper>
-          </motion.div>
-        </div>
-
-        {/* Content + Counters */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <motion.div className="lg:col-span-8 text-justify" {...fadeInUp}>
-            <h4 className="text-2xl font-semibold mb-4 text-white">Service Steps</h4>
-            <p className="text-white mb-6 text-lg">
-              Everything Your Brand Needs
-            </p>
-
-            <ul className="space-y-3 mb-6">
-              <li className="flex items-start gap-2">
-                <CheckCircle2 className="text-pink-600 mt-1" />
-                <span className="text-white">
-                  <strong>Branding & Creative Direction</strong><br />Brand identity, visual style, campaign concepts, creative planning, and a consistent voice for your business.
-                </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <CheckCircle2 className="text-pink-600 mt-1" />
-                <span className="text-white">
-                  <strong>Social Media Management</strong><br />Strategy, content planning, posting, captions, reels, short-form videos, and ongoing management for Instagram, TikTok, YouTube, and other key platforms.
-                </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <CheckCircle2 className="text-pink-600 mt-1" />
-                <span className="text-white">
-                  <strong>Photo & Video Production</strong><br />Professional photography, promotional videos, reels, commercials, product content, interviews, and branded content produced specifically for your audience.
-                </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <CheckCircle2 className="text-pink-600 mt-1" />
-                <span className="text-white">
-                  <strong>Meta & Google Advertising</strong><br />From campaign ideas and ad copy to creative production and campaign management, we bring your advertising together into one strategy.
-                </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <CheckCircle2 className="text-pink-600 mt-1" />
-                <span className="text-white">
-                  <strong>Website & Digital Presence</strong><br />Modern business websites and digital experiences designed to make your brand look professional, trustworthy, and ready to grow.
-                </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <CheckCircle2 className="text-pink-600 mt-1" />
-                <span className="text-white">
-                  <strong>Pre-Production to Post-Production</strong><br />Concept. Script. Planning. Shoot. Edit. Publish. Promote. We can manage the complete creative process from the first idea to the final campaign.
-                </span>
-              </li>
-            </ul>
-          </motion.div>
-
-          <motion.div className="lg:col-span-4" {...fadeInUp}>
-            <Swiper
-              modules={[Autoplay, Pagination]}
-              autoplay={{ delay: 4000, disableOnInteraction: false }}
-              pagination={{ clickable: true }}
-              loop={true}
-              className="rounded-lg overflow-hidden shadow-md h-140"
-            >
-              <SwiperSlide>
-                <video
-                  className="w-full h-full object-cover"
-                  controls
-                  muted
-                  playsInline
-                >
-                  <source src="/img/studio-1.mp4" type="video/mp4" />
-                </video>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Image src="/img/bd-2.webp" alt="Dotcam Studio shoot" width={400} height={500} className="w-full h-full object-cover" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Image src="/img/tp-1.webp" alt="Dotcam Studio shoot" width={400} height={500} className="w-full h-full object-cover" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Image src="/img/tp-2.webp" alt="Dotcam Studio shoot" width={400} height={500} className="w-full h-full object-cover" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Image src="/img/tp-3.webp" alt="Dotcam Studio shoot" width={400} height={500} className="w-full h-full object-cover" />
-              </SwiperSlide>
-            </Swiper>
+              <div className="flex items-end gap-[2px] h-10">
+                {[2, 1, 3, 1, 2, 1, 1, 3, 2, 1, 1, 2, 3, 1, 2, 1, 1, 3, 2, 1].map((w, i) => (
+                  <span key={i} style={{ width: `${w}px` }} className="h-full bg-white" />
+                ))}
+              </div>
+              <span className="text-sm md:text-base font-bold tracking-widest text-white">
+                @dotcam_social_sync
+              </span>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Video Section 
-      <section
-        className="relative py-40 bg-cover bg-center"
-        style={{ backgroundImage: "url('/img/bg-14.webp')" }}
-      >
-        <div className="absolute inset-0 bg-black/40" />
-        <motion.div
-          className="relative z-10 flex flex-col items-center justify-center text-center"
-          {...fadeIn}
-        >
-          <a
-            href="https://www.youtube.com/watch?v=SF4aHwxHtZ0"
-            className="flex items-center justify-center w-20 h-20 rounded-full bg-[#b90808] hover:bg-red-500 hover:text-white transition duration-300"
-            target="_blank"
+      {/* Services */}
+      <section className="bg-black py-20 md:py-28">
+        <div className="container mx-auto px-6">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            className="max-w-2xl mb-14"
           >
-            <FaPlay className="text-white" size={20} />
-          </a>
+            <p className="text-sm tracking-widest text-red-600 font-bold uppercase mb-3">Everything Your Brand Needs</p>
+            <h3 className="text-3xl md:text-5xl font-black uppercase leading-tight">Full-service growth, under one roof.</h3>
+          </motion.div>
+
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-neutral-800"
+          >
+            {services.map(({ icon: Icon, title, desc }, i) => (
+              <motion.div
+                key={title}
+                variants={fadeUp}
+                className="group bg-black p-8 hover:bg-red-600 transition-colors duration-300"
+              >
+                <span className="text-xs font-bold text-neutral-500 group-hover:text-black/60 transition-colors">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <Icon size={28} className="text-red-600 group-hover:text-black mt-4 mb-5 transition-colors" />
+                <h4 className="text-lg font-black uppercase mb-2 group-hover:text-black transition-colors">{title}</h4>
+                <p className="text-sm leading-relaxed text-neutral-400 group-hover:text-black/80 transition-colors">
+                  {desc}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact — matches page's red/black/white poster theme */}
+      <ContactSection theme="social" />
+
+      {/* Instagram — infinite dual marquee */}
+      <section className="py-16 md:py-20 bg-black overflow-hidden">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          className="text-center mb-10 px-6"
+        >
+          <p className="text-sm font-bold tracking-widest uppercase text-red-600 mb-3">Follow Along</p>
+          <h3 className="text-3xl md:text-5xl font-black uppercase text-white">@dotcam_social_sync</h3>
         </motion.div>
 
-        <Image
-          src="/img/light-3.webp"
-          alt="light effect"
-          width={200}
-          height={200}
-          className="absolute bottom-0 right-10 opacity-70"
-        />
-      </section>*/}
+        <div className="space-y-4 md:space-y-6 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+          <InstagramMarqueeRow items={instaRowA} />
+          <InstagramMarqueeRow items={instaRowB} reverse />
+        </div>
 
-      {/* Features Section 
-      <section className="py-20">
-        <div className="container mx-auto px-6">
-          <motion.div className="text-center mb-12" {...fadeInUp}>
-            <h1 className="text-4xl text-white font-bold">Why Choose Us</h1>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature) => (
-              <motion.div
-                key={feature.id}
-                className="bg-white shadow-lg overflow-hidden hover:shadow-2xl transition"
-                whileHover={{ scale: 1.05 }}
-                {...fadeInUp}
-              >
-                <Image
-                  src={feature.img}
-                  alt={feature.title}
-                  width={600}
-                  height={400}
-                  className="w-full h-60 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-gray-800 text-justify">{feature.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+        <div className="text-center mt-10 px-6">
+          <a
+            href="https://www.instagram.com/dotcam_social_sync?igsh=MWJkYzhiNXFuMTFoZQ%3D%3D&utm_source=qr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-red-600 text-white px-7 py-3 font-bold uppercase tracking-wide hover:bg-white hover:text-black transition"
+          >
+            <FaInstagram size={18} /> Follow Us
+          </a>
         </div>
       </section>
-
-      <TestimonialSection />*/}
-      <ContactSection />
-
-      {/* Instagram Gallery */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap md:flex-nowrap items-center justify-center">
-            {images.map((src, i) => (
-              <motion.div
-                key={i}
-                className="relative group overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"
-                whileHover={{ scale: 1.1 }}
-                {...fadeIn}
-              >
-                <Image
-                  src={src}
-                  alt={`Instagram ${i + 1}`}
-                  width={200}
-                  height={200}
-                  className="object-cover w-40 h-40 md:w-48 md:h-48 group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
-                  <FaInstagram className="text-white text-3xl" />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="mt-8 text-center">
-             <a href="https://www.instagram.com/dotcam_productions/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-full shadow-md hover:scale-105 transition-transform duration-300">
-              <FaInstagram className="text-lg" />
-              <span className="font-medium">Follow Us on Instagram</span>
-            </a>
-          </div>
-        </div>
-      </section>
-    </>
+    </div>
   );
 }

@@ -12,7 +12,7 @@ export default function BlogDetail() {
   if (!blog) {
     return (
       <div className="text-center py-20 text-white">
-        <h2 className="text-3xl font-bold">Blog Not Found</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold">Blog Not Found</h2>
         <Link href="/blog" className="text-red-600 underline">
           Back to Blogs
         </Link>
@@ -39,7 +39,7 @@ export default function BlogDetail() {
           .join(" ")}
       </p>
 
-      <h4 className="text-2xl md:text-3xl text-white font-bold">
+      <h4 className="text-3xl md:text-4xl font-extrabold text-white">
         {blog.title}
       </h4>
 
@@ -54,7 +54,7 @@ export default function BlogDetail() {
       </ul>
 
       {/* Content */}
-      <div className="space-y-4 text-white leading-relaxed text-justify">
+      <div className="space-y-4 text-base md:text-lg font-bold leading-relaxed text-white text-justify">
         <p>{blog.content}</p>
         <p>
           Portrait photography can feel intimidating for beginners, but with a
@@ -86,7 +86,7 @@ export default function BlogDetail() {
       />
 
       {/* More Content */}
-      <div className="space-y-4 text-white leading-relaxed text-justify">
+      <div className="space-y-4 text-base md:text-lg font-bold leading-relaxed text-white text-justify">
         <p>
           Another important aspect is building comfort with your subject.
           Portraits are not just about how a person looks but also about
@@ -107,7 +107,7 @@ export default function BlogDetail() {
       </div>
 
       <div className="mt-10">
-        <h4 className="text-xl font-bold text-white  mb-4">Leave A Comment:</h4>
+        <h4 className="text-lg font-semibold tracking-wide text-white mb-4">Leave A Comment:</h4>
         <form className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <input

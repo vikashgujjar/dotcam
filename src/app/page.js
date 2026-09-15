@@ -21,10 +21,7 @@ const Page = () => {
   return (
     <>
       <section
-        className="relative  bg-black text-white overflow-hidden cursor-none"
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-      >
+        className="relative  bg-black text-white overflow-hidden">
         <div>
           <Hero />
           <Studio />
@@ -32,24 +29,14 @@ const Page = () => {
           <Production />
         </div>
 
-        <div
+        {/* <div
           className="absolute w-60 h-60 rounded-full bg-gradient-to-r from-white to-white blur-3xl opacity-55 transition-all duration-300 pointer-events-none"
           style={{
             left: pos.x - 160,
             top: pos.y - 160,
             transform: hover ? "scale(1)" : "scale(0)",
           }}
-        ></div>
-
-        {/* Custom cursor */}
-        <div
-          className="fixed w-6 h-6 rounded-full bg-white mix-blend-difference pointer-events-none transition-transform duration-150"
-          style={{
-            left: pos.x - 12,
-            top: pos.y - 12,
-            transform: hover ? "scale(1)" : "scale(0.5)",
-          }}
-        ></div>
+        ></div> */}
       </section>
     </>
   );

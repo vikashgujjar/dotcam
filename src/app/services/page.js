@@ -40,21 +40,21 @@ export default function Banner() {
           />
         </div>
         <div className="relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold text-white">Service Details</h2>
-          <p className="mt-4 text-lg text-gray-200 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white">Service Details</h2>
+          <p className="mt-4 text-base md:text-lg font-bold leading-relaxed text-gray-200 max-w-2xl mx-auto">
             We provide professional services with detailed information and insights to help you succeed.
           </p>
         </div>
       </section>
 
-      <section className="blog-details-inner container mx-auto px-4 py-20">
+      <section className="blog-details-inner container mx-auto px-4 py-20 overflow-x-hidden">
         <div className="mb-12" data-aos="fade-right">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-5">
-              <h1 className="text-2xl lg:text-5xl font-bold text-white">Fashion Photography</h1>
+              <h1 className="text-3xl md:text-4xl font-extrabold text-white">Fashion Photography</h1>
             </div>
             <div className="lg:col-span-7">
-              <p className="text-white leading-relaxed text-lg text-justify">
+              <p className="text-base md:text-lg font-bold leading-relaxed text-white text-justify">
                 We Can Shoot You – At DOTCAM, we specialize in turning your moments into timeless stories...
               </p>
             </div>
@@ -72,19 +72,19 @@ export default function Banner() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-8 text-justify" data-aos="fade-right">
-            <h4 className="text-2xl font-semibold mb-4 text-white">Service Steps</h4>
-            <p className="text-white mb-6 text-lg">
+            <h4 className="text-lg font-semibold tracking-wide mb-4 text-white">Service Steps</h4>
+            <p className="text-base md:text-lg font-bold leading-relaxed text-white mb-6">
               The talent at DOTCAM runs wide and deep...
             </p>
             <ul className="space-y-3 mb-6">
               {["Expertise across multiple markets","Organized specialized service","Creativity across lifestyle shoots"].map((text, idx) => (
                 <li key={idx} className="flex items-start gap-2" data-aos="fade-up" data-aos-delay={idx * 100}>
                   <CheckCircle2 className="text-pink-600 mt-1" />
-                  <span className="text-white">{text}</span>
+                  <span className="text-base md:text-lg text-white">{text}</span>
                 </li>
               ))}
             </ul>
-            <p className="text-white text-lg">Across every market, every location, and every shoot, DOTCAM is driven by one promise: “We Can Shoot You.”</p>
+            <p className="text-base md:text-lg font-bold leading-relaxed text-white">Across every market, every location, and every shoot, DOTCAM is driven by one promise: “We Can Shoot You.”</p>
           </div>
 
           <div className="lg:col-span-4 space-y-8" data-aos="fade-left">
@@ -115,15 +115,15 @@ export default function Banner() {
       <section className="py-20 ">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12" data-aos="fade-up">
-            <h1 className="text-4xl text-white font-bold">Why Choose Us</h1>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-white">Why Choose Us</h1>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature) => (
               <div key={feature.id} className="bg-white shadow-lg overflow-hidden hover:shadow-2xl transition" data-aos="fade-up">
                 <Image src={feature.img} alt={feature.title} width={600} height={400} className="w-full h-60 object-cover" />
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-gray-800 text-justify">{feature.desc}</p>
+                  <h3 className="text-lg font-semibold tracking-wide mb-2">{feature.title}</h3>
+                  <p className="text-base md:text-lg font-bold leading-relaxed text-gray-800 text-justify">{feature.desc}</p>
                 </div>
               </div>
             ))}

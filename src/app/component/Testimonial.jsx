@@ -1,10 +1,13 @@
 "use client";
 
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules"; // ✅ Add Navigation here
 import "swiper/css";
 import "swiper/css/navigation"; // ✅ Navigation styles
 import Image from "next/image";
+import { Quote, Star } from "lucide-react";
 
 const testimonials = [
   {
@@ -36,7 +39,168 @@ const testimonials = [
   },
 ];
 
-export default function TestimonialSection() {
+function LightTestimonials() {
+  const [active, setActive] = useState(0);
+  const t = testimonials[active];
+
+  return (
+    <section className="relative py-12 md:py-18 bg-white overflow-hidden">
+      <div className="pointer-events-none absolute -right-24 top-10 h-72 w-72 rounded-full bg-red-50 blur-3xl" />
+      <div className="pointer-events-none absolute -left-24 bottom-10 h-64 w-64 rounded-full bg-red-50 blur-3xl" />
+
+      <div className="container mx-auto px-6 relative">
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <p className="text-sm tracking-widest text-red-600 font-semibold mb-3">CLIENT LOVE</p>
+          <h3 className="text-3xl md:text-4xl font-extrabold text-neutral-900">What Our Clients Say</h3>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center max-w-5xl mx-auto">
+          <div className="lg:col-span-5 relative">
+            <div className="relative rounded-[2rem] overflow-hidden shadow-2xl aspect-4/5">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={t.id}
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="absolute inset-0"
+                >
+                  <Image src={t.image} alt={t.name} fill sizes="(max-width: 1024px) 60vw, 30vw" className="object-cover" />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+            <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl px-5 py-3 flex items-center gap-2 border border-neutral-100">
+              <div className="flex text-red-600">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} size={14} className="text-red-600" fill="currentColor" />
+                ))}
+              </div>
+              <span className="text-sm font-semibold text-neutral-900">5.0</span>
+            </div>
+          </div>
+
+          <div className="lg:col-span-7">
+            <Quote className="text-red-200 mb-4" size={48} fill="currentColor" />
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={t.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.4 }}
+              >
+                <p className="text-xl md:text-2xl font-semibold leading-relaxed text-neutral-900">
+                  “{t.review}”
+                </p>
+                <p className="mt-6 font-semibold text-neutral-900">{t.name}</p>
+                <p className="text-sm text-neutral-500">{t.location}</p>
+              </motion.div>
+            </AnimatePresence>
+
+            <div className="flex gap-3 mt-8">
+              {testimonials.map((item, i) => (
+                <button
+                  key={item.id}
+                  onClick={() => setActive(i)}
+                  aria-label={`Show testimonial from ${item.name}`}
+                  className={`relative w-12 h-12 rounded-full overflow-hidden ring-2 transition ${
+                    i === active ? "ring-red-600" : "ring-transparent opacity-50 hover:opacity-100"
+                  }`}
+                >
+                  <Image src={item.image} alt={item.name} fill sizes="48px" className="object-cover" />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProductionsTestimonials() {
+  const [active, setActive] = useState(0);
+  const t = testimonials[active];
+
+  return (
+    <section className="relative py-14 md:py-18 bg-black text-white overflow-hidden">
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] max-w-2xl max-h-160 rounded-full bg-red-600/10 blur-[140px]" />
+
+      <div className="container mx-auto px-6 relative">
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <p className="text-sm tracking-widest text-red-500 font-semibold uppercase mb-3">Client Love</p>
+          <h3 className="text-3xl md:text-4xl font-bold">What Our Clients Say</h3>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center max-w-5xl mx-auto">
+          <div className="lg:col-span-5 relative">
+            <div className="relative rounded-2xl overflow-hidden ring-1 ring-white/10 shadow-2xl aspect-4/5">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={t.id}
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="absolute inset-0"
+                >
+                  <Image src={t.image} alt={t.name} fill sizes="(max-width: 1024px) 60vw, 30vw" className="object-cover" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
+                </motion.div>
+              </AnimatePresence>
+              <div className="absolute inset-0 ring-1 ring-inset ring-white/5" />
+            </div>
+            <div className="absolute -bottom-6 -right-6 bg-neutral-950 ring-1 ring-white/10 rounded-2xl shadow-xl px-5 py-3 flex items-center gap-2">
+              <div className="flex text-red-500">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} size={14} className="text-red-500" fill="currentColor" />
+                ))}
+              </div>
+              <span className="text-sm font-semibold text-white">5.0</span>
+            </div>
+          </div>
+
+          <div className="lg:col-span-7">
+            <Quote className="text-red-600/30 mb-4" size={48} fill="currentColor" />
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={t.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.4 }}
+              >
+                <p className="text-xl md:text-2xl font-semibold leading-relaxed text-white">
+                  “{t.review}”
+                </p>
+                <p className="mt-6 font-semibold text-white">{t.name}</p>
+                <p className="text-sm text-neutral-500">{t.location}</p>
+              </motion.div>
+            </AnimatePresence>
+
+            <div className="flex gap-3 mt-8">
+              {testimonials.map((item, i) => (
+                <button
+                  key={item.id}
+                  onClick={() => setActive(i)}
+                  aria-label={`Show testimonial from ${item.name}`}
+                  className={`relative w-12 h-12 rounded-full overflow-hidden ring-2 transition ${
+                    i === active ? "ring-red-600" : "ring-white/10 opacity-50 hover:opacity-100"
+                  }`}
+                >
+                  <Image src={item.image} alt={item.name} fill sizes="48px" className="object-cover" />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DarkTestimonials() {
   return (
     <section
       className="relative py-20 bg-cover bg-center"
@@ -84,7 +248,7 @@ export default function TestimonialSection() {
                   </div>
 
                   {/* Review */}
-                  <p className="text-white text-2xl italic mb-6">
+                  <p className="text-base md:text-lg font-bold leading-relaxed text-white italic mb-6">
                     “{t.review}”
                   </p>
 
@@ -98,7 +262,7 @@ export default function TestimonialSection() {
                       className="rounded-full border-2 h-14 w-14 border-red-800"
                     />
                     <div>
-                      <h4 className="text-xl text-white font-semibold">
+                      <h4 className="text-lg font-semibold tracking-wide text-white">
                         {t.name}
                       </h4>
                       <p className="text-sm text-gray-300">{t.location}</p>
@@ -112,4 +276,9 @@ export default function TestimonialSection() {
       </div>
     </section>
   );
+}
+
+export default function TestimonialSection({ light = false, theme }) {
+  if (theme === "productions") return <ProductionsTestimonials />;
+  return light ? <LightTestimonials /> : <DarkTestimonials />;
 }
